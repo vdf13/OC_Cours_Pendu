@@ -1,11 +1,12 @@
 # fichier des fonction du pendu
 import os
 os.chdir("C:/01_DATA/PYTHON/pendu")
+os.getcwd()		# affiche le répertoire courant
 import pickle
 
 from random import randrange
 from random import choice
-from donnees import *
+#from donnees import *
 
 
 # Ouvrir le  fichier donnees et créer la liste de mots
@@ -41,7 +42,7 @@ def cx_lettre():
 	lettre = input("Tapez une lettre: ")
 	lettre = lettre.lower()
 	c = 0
-	if lettre not lettre.isalpha():
+	if len(lettre)>1 or not lettre.isalpha():
 		print("Ceci n'est pas un caractère acceptable")
 		return cx_lettre()
 	else:
@@ -61,22 +62,27 @@ def nom_utilisateur():
 	le fichier score """
 	utilisateur = input("entrez le nom du joueur :")
 	# Mettre la première lettre en majuscule
-	utilisateur = utilisateur.Capitalize()
+	utilisateur = utilisateur.capitalize()
 	if not utilisateur.isalnum() or len(utilisateur)<4:
 		print ("ce nom n'est pas correct.")
 		return nom_utilisateur()
 	else:
 		return utilisateur
 
-def enrg_score():
+def enrg_score(score):
 	""" Enregistrer les scores dans un fichier score, 
 	le créer si il n'existe pas"""
+	with open('score', 'wb') as fichier:
+		score_pick = pickle.Pickler(fichier)
+		score_pick.dump(score)
 
 
 def recup_score():
 	""" Récupère les anciens scores du fichiers chargé dans un dictionnaire"""
-
-
+	with open('score', 'rb') as fichier:
+		score_unpick = pickle.Unpickler(fichier)
+		score = score_unpick.load()
+		return score
 
 
 # code a integrer dans le fichier principal
