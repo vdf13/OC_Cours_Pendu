@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 # fichier des fonction du pendu
 import os
 os.chdir("C:/01_DATA/PYTHON/pendu")
